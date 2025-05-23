@@ -1,0 +1,57 @@
+<main>
+  <div class="form-group">
+    <label for="produto-title">Id:</label>
+    <input type="text" id="produto-id" name="id" placeholder="Digite o id do produto" [(ngModel)]="pudutoInput.id" required />
+   
+    <label for="produto-title">Título:</label>
+    <input type="text" id="produto-title" name="title" placeholder="Digite o título do produto" [(ngModel)]="pudutoInput.title" required />
+    
+    <label for="produto-SubTítulo">SubTítulo:</label>
+    <input type="text" id="produto-SubTítulo" name="SubTítulo" placeholder="Digite o SubTítulo do produto" [(ngModel)]="pudutoInput.subtitle" required />
+    
+    <label for="produto-Descrição">Descrição:</label>
+    <input type="text" id="produto-Descrição" name="Descrição" placeholder="Digite a Descrição do produto" [(ngModel)]="pudutoInput.description" required />
+    
+    <label for="produto-Valor">Valor:</label>
+    <input type="text" id="produto-Valor" name="Valor" placeholder="Digite o Valor do produto" [(ngModel)]="pudutoInput.value" required />
+    
+    <label for="produto-LinkImagem">Link Imagem:</label>
+    <input type="text" id="produto-LinkImagem" name="LinkImagem" placeholder="Digite o Link da Imagem" [(ngModel)]="pudutoInput.imgLink" required />
+
+    <button (click)="postProduto()">Confirmar</button>
+  </div>
+  
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Valor (R$)</th>
+        <th>Imagem</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produto of produtos">
+        <td>
+          <strong>{{ produto.title }}</strong><br />
+          <small>{{ produto.subtitle }}</small>
+        </td>
+        <td>{{ produto.value | currency:'BRL':'symbol':'1.2-2' }}</td>
+        <td>
+          <img 
+            [src]="produto.imgLink" 
+            [alt]="produto.title" 
+            width="40" 
+            height="40"
+            style="object-fit: cover; border-radius: 6px;"
+          />
+        </td>
+        <td>
+          <button class="btn edit-btn" (click)="editarProduto(produto.id)" title="Editar">✏️</button>
+          <button class="btn delete-btn" (click)="excluirProduto(produto.id)" title="Excluir">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</main>
